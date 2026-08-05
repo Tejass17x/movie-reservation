@@ -1,0 +1,65 @@
+.booking-details{
+
+    margin-top:40px;
+
+    border-top:1px solid #2d2d46;
+
+    padding-top:30px;
+
+}
+
+.detail-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin:18px 0;
+
+    color:#8f8aa8;
+
+    font-size:17px;
+
+}
+
+.detail-row strong{
+
+    color:white;
+
+    font-weight:600;
+
+}
+
+.booking-details hr{
+
+    border:none;
+
+    border-top:1px solid #2d2d46;
+
+    margin:28px 0;
+
+}
+
+.total{
+
+    font-size:22px;
+
+}
+
+.total span{
+
+    color:white;
+
+    font-weight:600;
+
+}
+
+.total strong{
+
+    color:#d8a22b;
+
+    font-size:32px;
+
+}
