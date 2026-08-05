@@ -1,4 +1,4 @@
-# Movie Reservation
+# movie-reservation
 
 A full-stack movie ticket booking application built with a React frontend and an Express + MySQL backend.
 
