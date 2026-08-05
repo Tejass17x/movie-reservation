@@ -1,0 +1,51 @@
+.payment-card {
+    width: 430px;
+    height: 185px;
+    border-radius: 20px;
+    padding: 22px;
+    background: linear-gradient(135deg,
+            #253a63,
+            #1d467a);
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, .35);
+}
+
+.card-label {
+    color: #9ba6d4;
+    font-size: 11px;
+    letter-spacing: 2px;
+    letter-spacing: 2px;
+}
+
+.card-number {
+    font-size: 22px;
+    letter-spacing: 6px;
+    letter-spacing: 8px;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.card-footer p {
+    color: #bfc7e7;
+    font-size: 11px;
+    margin-bottom: 6px;
+}
+
+.card-footer h3 {
+    margin: 0;
+    font-size: 15px;
+}
+
+.expiry {
+    text-align: right;
+}
