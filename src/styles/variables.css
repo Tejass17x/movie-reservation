@@ -1,0 +1,21 @@
+:root{
+    --background:#07070d;
+    --card:#111118;
+
+    --gold:#D4A017;
+    --gold-hover:#E4B73C;
+
+    --white:#ffffff;
+    --secondary:#9CA3AF;
+
+    --available:#6B6B8D;
+    --selected:#D4A017;
+    --reserved:#1D1D26;
+    --blocked:#7B2232;
+
+    --border:#242436;
+
+    --radius:12px;
+
+    --shadow:0 12px 35px rgba(0,0,0,.35);
+}

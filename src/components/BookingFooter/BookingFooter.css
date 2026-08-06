@@ -1,0 +1,41 @@
+.booking-footer{
+    margin-top:40px;
+    padding:28px;
+    background:#111118;
+    border:1px solid #232330;
+    border-radius:16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.booking-info{
+    display:flex;
+    gap:60px;
+}
+.label{
+    color:#9CA3AF;
+    font-size:12px;
+    margin-bottom:6px;
+}
+.booking-info h2{
+    color:white;
+    font-size:16px;
+}
+.continue-btn{
+    background:#D4A017;
+    color:black;
+    border:none;
+    padding:12px 30px;
+    border-radius:10px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+.continue-btn:hover{
+    transform:translateY(-2px);
+}
+.continue-btn:disabled{
+    background:#666;
+    cursor:not-allowed;
+}

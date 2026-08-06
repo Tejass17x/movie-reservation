@@ -1,0 +1,36 @@
+.success-buttons{
+    display:flex;
+    gap:18px;
+    margin-top:40px;
+
+}
+.my-bookings-btn{
+    flex:1;
+    height:56px;
+    border-radius:14px;
+    border:1px solid #2d2d46;
+    background:#1b1b2c;
+    color:white;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+.my-bookings-btn:hover{
+    background:#25253a;
+}
+.browse-btn{
+    flex:1;
+    height:56px;
+    border:none;
+    border-radius:14px;
+    background:#d8a22b;
+    color:black;
+    font-size:17px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+}
+.browse-btn:hover{
+    background:#eab22f;
+}

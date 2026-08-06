@@ -1,0 +1,32 @@
+.seat{
+    width:34px;
+    height:34px;
+    border:none;
+    border-radius:8px;
+    transition:all .25s ease;
+}
+
+.seat.available{
+    background:#515168;
+    cursor:pointer;
+}
+
+.seat.available:hover{
+    background:#7875a6;
+    transform:scale(1.08);
+}
+
+.seat.selected{
+    background:#D4A017;
+    cursor:pointer;
+}
+
+.seat.reserved{
+    background:#1b1b24;
+    cursor:not-allowed;
+}
+
+.seat.blocked{
+    background:#7d2030;
+    cursor:not-allowed;
+}
