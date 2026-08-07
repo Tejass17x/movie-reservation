@@ -1,33 +1,4 @@
 {
-<<<<<<< HEAD
-  "name": "movie-reservation-backend",
-  "version": "1.0.0",
-  "description": "Movie Reservation System - Catalog & Showtime Management Service",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
-  },
-  "keywords": [
-    "movie-reservation",
-    "express",
-    "mysql",
-    "sequelize"
-  ],
-  "author": "Manya Walia",
-  "license": "ISC",
-  "dependencies": {
-    "cors": "^2.8.6",
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1",
-    "mysql2": "^3.23.2",
-    "sequelize": "^6.37.8"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.14"
-  }
-}
-=======
   "name": "cinevault-booking",
   "private": true,
   "version": "0.0.0",
@@ -51,4 +22,3 @@
     "vite": "^8.2.0"
   }
 }
->>>>>>> 40a68d586cd7249b8b1746e5452c97fe27b5188b

@@ -61,3 +61,18 @@
 .user-section button:hover {
     color: white;
 }
+
+.signin-btn {
+  background: #d4a017;
+  color: black;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.signin-btn:hover {
+  opacity: 0.9;
+}

@@ -1,0 +1,87 @@
+body {
+  margin: 0;
+  background: #0a0913;
+  font-family: Arial, sans-serif;
+}
+
+.home {
+  max-width: 1200px;
+  margin: auto;
+  padding: 50px 20px;
+}
+
+.hero {
+  height: 340px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 50px;
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 40px;
+}
+
+.subtitle {
+  color: #d4a017;
+  letter-spacing: 3px;
+  font-size: 14px;
+}
+
+.hero h1 {
+  color: white;
+  font-size: 64px;
+  margin-top: 10px;
+}
+
+.search-filter {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.search-box {
+  width: 350px;
+  height: 48px;
+  border-radius: 12px;
+  border: 1px solid #2f2d45;
+  background: #141322;
+  color: white;
+  padding: 0 20px;
+  font-size: 16px;
+}
+
+.search-box::placeholder {
+  color: #8c8aa8;
+}
+
+.genres {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.genres button {
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 1px solid #2f2d45;
+  background: #181727;
+  color: #b4b3c8;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.genres .active {
+  background: #d4a017;
+  color: black;
+  border: none;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
