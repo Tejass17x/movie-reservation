@@ -1,0 +1,187 @@
+/* ============================================
+   Showtimes Page – Premium dark cinema admin
+   ============================================ */
+
+.showtimes-page {
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.showtimes-header {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-5);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.showtimes-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: var(--space-3);
+  flex: 1 1 0;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.showtimes-filters > * {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.showtimes-filters input,
+.showtimes-filters select,
+.showtimes-filters input[type='date'] {
+  width: 100%;
+  min-width: 0;
+}
+
+.showtimes-summary {
+  margin-bottom: var(--space-3);
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.showtimes-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.showtimes-table th,
+.showtimes-table td {
+  padding: var(--space-4) var(--space-3);
+  text-align: left;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.showtimes-table th {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.showtimes-table td {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.showtimes-table tbody tr {
+  transition: background var(--transition-fast);
+}
+
+.showtimes-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.showtimes-table .actions {
+  display: flex;
+  gap: var(--space-2);
+  white-space: nowrap;
+}
+
+/* Showtime Form Modal */
+.showtime-form {
+  width: 760px;
+  max-width: 100%;
+  background: var(--bg-modal);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  animation: slideUp 200ms ease-out;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.showtime-form h3 {
+  font-size: var(--font-size-xl);
+  margin: 0 0 var(--space-5);
+  color: var(--text-primary);
+}
+
+.showtime-form label {
+  display: block;
+  margin-bottom: var(--space-4);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+}
+
+.showtime-form input,
+.showtime-form select {
+  margin-top: var(--space-1);
+}
+
+.showtime-form .row {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.showtime-form .row label {
+  flex: 1;
+}
+
+.showtime-form .form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--glass-border);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .showtimes-table {
+    min-width: 940px;
+  }
+}
+
+@media (max-width: 900px) {
+  .showtimes-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .showtimes-header > button {
+    width: 100%;
+  }
+
+  .showtimes-filters {
+    grid-template-columns: 1fr;
+    min-width: 0;
+  }
+
+  .showtime-form .row {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 680px) {
+  .showtimes-table th,
+  .showtimes-table td {
+    padding: var(--space-3) var(--space-2);
+    font-size: var(--font-size-xs);
+  }
+
+  .table-wrap {
+    padding: var(--space-3);
+  }
+}

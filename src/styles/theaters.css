@@ -1,0 +1,173 @@
+/* ============================================
+   Theaters Page – Premium dark cinema admin
+   ============================================ */
+
+.theaters-page {
+  padding: 0;
+}
+
+.theaters-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.theaters-header .left {
+  flex: 1;
+  max-width: 360px;
+}
+
+.theaters-header input {
+  width: 100%;
+}
+
+.theaters-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+.theaters-table th,
+.theaters-table td {
+  padding: var(--space-4) var(--space-3);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.theaters-table th {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--glass-border);
+  white-space: nowrap;
+}
+
+.theaters-table td {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.theaters-table tbody tr {
+  transition: background var(--transition-fast);
+}
+
+.theaters-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.theaters-table .actions {
+  display: flex;
+  gap: var(--space-2);
+  white-space: nowrap;
+}
+
+/* Theater Form Modal */
+.theater-form {
+  width: 720px;
+  max-width: 100%;
+  background: var(--bg-modal);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  animation: slideUp 200ms ease-out;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.theater-form h3 {
+  font-size: var(--font-size-xl);
+  margin: 0 0 var(--space-5);
+  color: var(--text-primary);
+}
+
+.theater-form label {
+  display: block;
+  margin-bottom: var(--space-4);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+}
+
+.theater-form input,
+.theater-form select {
+  margin-top: var(--space-1);
+}
+
+.theater-form .row {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.theater-form .row label {
+  flex: 1;
+}
+
+.theater-form .form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--glass-border);
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .theaters-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .theaters-header .left {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 760px) {
+  .theaters-table thead {
+    display: none;
+  }
+
+  .theaters-table tr {
+    display: block;
+    margin-bottom: var(--space-3);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+  }
+
+  .theaters-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  .theaters-table td::before {
+    content: attr(data-label);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-muted);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+  }
+
+  .theaters-table td:last-child {
+    border-bottom: none;
+  }
+
+  .theater-form .row {
+    flex-direction: column;
+  }
+}
