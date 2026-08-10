@@ -3,12 +3,16 @@ import "./MovieCard.css";
 function MovieCard({ movie }) {
   return (
     <div className="movie-card">
-      <img src={movie.image} alt={movie.title} />
-
-      <div className="movie-info">
-        <span>{movie.rating}</span>
-        <h3>{movie.title}</h3>
+      <div className="movie-image">
+        <img src={movie.image} alt={movie.title} />
+        <span className="rating">{movie.rating}</span>
       </div>
+
+      <h3>{movie.title}</h3>
+
+      <p>
+        {movie.genre} · {movie.duration}
+      </p>
     </div>
   );
 }

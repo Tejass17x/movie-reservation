@@ -67,6 +67,20 @@
   color: white;
   padding: 0 16px;
   box-sizing: border-box;
+  font-size: 18px;
+}
+
+.auth-card input::placeholder {
+  color: #8f8ba8;
+  font-size: 18px;
+  font-weight: 400;
+  opacity: 1;
+}
+
+.error {
+  color: #ff6b6b;
+  font-size: 14px;
+  margin-top: 8px;
 }
 
 .demo-box {

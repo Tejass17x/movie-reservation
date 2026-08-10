@@ -1,7 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "../styles/Login.css";
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+
+  const navigate = useNavigate();
+
+  function handleLogin() {
+    if (email.trim() === "") {
+      setError("Email is required");
+      return;
+    }
+
+    navigate("/");
+  }
   return (
     <div className="auth-page">
       <div className="auth-card">
@@ -20,7 +34,14 @@ function Login() {
         <input
           type="email"
           placeholder="your@email.com"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            setError("");
+          }}
         />
+
+        {error && <p className="error">{error}</p>}
 
         <div className="demo-box">
           <p>Demo accounts — click to autofill:</p>
@@ -30,7 +51,7 @@ function Login() {
           <span>Admin — Morgan Adeyemi</span>
         </div>
 
-        <button className="submit-btn">
+        <button className="submit-btn" onClick={handleLogin}>
           Sign In
         </button>
 
