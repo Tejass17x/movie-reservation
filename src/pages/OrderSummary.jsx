@@ -4,8 +4,7 @@ import { useNavigate } from "react-router-dom";
 import CountdownTimer from "../components/CountdownTimer/CountdownTimer";
 import "../styles/OrderSummary.css";
 import Navbar from "../components/Navbar/Navbar";
-import poster from "../assets/poster.jpg";
-
+import poster from "../assets/movie1.png";
 function OrderSummary() {
 
     const { selectedSeats, movie } = useContext(BookingContext);
