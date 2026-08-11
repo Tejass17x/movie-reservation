@@ -1,36 +1,61 @@
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import api from "../utils/api.js";
+import { useAuth } from "../context/AuthContext";
+import { useToast } from "../context/ToastContext";
 import "../styles/Register.css";
 
 function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState("Member");
-  const [nameError, setNameError] = useState("");
-  const [emailError, setEmailError] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
+  const { login, isAuthenticated } = useAuth();
+  const { showToast } = useToast();
   const navigate = useNavigate();
 
-  function handleRegister() {
-    setNameError("");
-    setEmailError("");
-
-    let valid = true;
-
-    if (name.trim() === "") {
-      setNameError("Full name is required");
-      valid = false;
-    }
-
-    if (email.trim() === "") {
-      setEmailError("Email is required");
-      valid = false;
-    }
-
-    if (!valid) return;
-
-    navigate("/login");
+  if (isAuthenticated) {
+    return <Navigate to="/" replace />;
   }
+
+  const handleRegister = async () => {
+    setError("");
+
+    if (!name.trim() || !email.trim() || !password) {
+      setError("All fields are required");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const { data } = await api.post("/auth/register", {
+        name,
+        email,
+        password,
+      });
+      login(data.token, data.user);
+      showToast(`Welcome, ${data.user.name}!`, "success");
+      navigate("/", { replace: true });
+    } catch (err) {
+      setError(err.response?.data?.error || "Registration failed. Try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="auth-page">
       <div className="auth-card">
@@ -51,11 +76,9 @@ function Register() {
           value={name}
           onChange={(e) => {
             setName(e.target.value);
-            setNameError("");
+            setError("");
           }}
         />
-
-        {nameError && <p className="error">{nameError}</p>}
 
         <label>EMAIL ADDRESS</label>
         <input
@@ -64,34 +87,40 @@ function Register() {
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
-            setEmailError("");
+            setError("");
           }}
         />
 
-        {emailError && <p className="error">{emailError}</p>}
+        <label>PASSWORD</label>
+        <input
+          type="password"
+          placeholder="At least 6 characters"
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            setError("");
+          }}
+        />
 
-        <label>ACCOUNT ROLE</label>
+        <label>CONFIRM PASSWORD</label>
+        <input
+          type="password"
+          placeholder="Repeat your password"
+          value={confirmPassword}
+          onChange={(e) => {
+            setConfirmPassword(e.target.value);
+            setError("");
+          }}
+        />
 
-        <div className="role-buttons">
-          <button
-            type="button"
-            className={role === "Member" ? "active" : ""}
-            onClick={() => setRole("Member")}
-          >
-            Member
-          </button>
+        {error && <p className="error">{error}</p>}
 
-          <button
-            type="button"
-            className={role === "Administrator" ? "active" : ""}
-            onClick={() => setRole("Administrator")}
-          >
-            Administrator
-          </button>
-        </div>
-
-        <button className="submit-btn" onClick={handleRegister}>
-          Create Account
+        <button
+          className="submit-btn"
+          onClick={handleRegister}
+          disabled={loading}
+        >
+          {loading ? "Creating account..." : "Create Account"}
         </button>
 
         <Link to="/">

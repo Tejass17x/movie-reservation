@@ -12,12 +12,16 @@ import * as movieController from './controllers/movieController.js';
 import * as theaterController from './controllers/theaterController.js';
 import * as showtimeController from './controllers/showtimeController.js';
 import * as bookingController from './controllers/bookingController.js';
+import * as publicController from './controllers/publicController.js';
+import * as userBookingController from './controllers/userBookingController.js';
 
 // Middlewares
 import { authenticate, requireAdmin } from './middleware/auth.js';
 import {
   validate,
   loginSchema,
+  registerSchema,
+  holdSchema,
   movieSchema,
   theaterSchema,
   screenSchema,
@@ -41,8 +45,25 @@ app.get('/api/health', (req, res) => {
   return res.json({ status: 'OK', timestamp: new Date() });
 });
 
-// AUTH ROUTE
+// PUBLIC CATALOG ROUTES
+app.get('/api/movies', publicController.listMovies);
+app.get('/api/movies/:id/showtimes', publicController.listMovieShowtimes);
+app.get('/api/showtimes', publicController.listShowtimes);
+app.get('/api/showtimes/:id/seats', publicController.getSeatMap);
+
+// AUTH ROUTES
+app.post('/api/auth/register', validate(registerSchema), authController.register);
 app.post('/api/auth/login', validate(loginSchema), authController.login);
+
+// PROTECTED USER ROUTES
+const userRouter = express.Router();
+userRouter.use(authenticate);
+userRouter.get('/me', authController.me);
+userRouter.get('/my/bookings', userBookingController.getMyBookings);
+userRouter.post('/showtimes/:id/hold', validate(holdSchema), userBookingController.holdSeats);
+userRouter.post('/bookings/:id/confirm', userBookingController.confirmBooking);
+userRouter.delete('/bookings/:id', userBookingController.cancelBooking);
+app.use('/api', userRouter);
 
 // PROTECTED ADMIN ROUTES (All routes below require authentication and admin role)
 const adminRouter = express.Router();

@@ -1,21 +1,47 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation, Navigate } from "react-router-dom";
 import { useState } from "react";
+import api from "../utils/api.js";
+import { useAuth } from "../context/AuthContext";
+import { useToast } from "../context/ToastContext";
 import "../styles/Login.css";
 
 function Login() {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
+  const { login, isAuthenticated } = useAuth();
+  const { showToast } = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  function handleLogin() {
-    if (email.trim() === "") {
-      setError("Email is required");
+  if (isAuthenticated) {
+    return <Navigate to="/" replace />;
+  }
+
+  const from = location.state?.from?.pathname || "/";
+
+  const handleLogin = async () => {
+    setError("");
+    if (!email.trim() || !password) {
+      setError("Email and password are required");
       return;
     }
 
-    navigate("/");
-  }
+    setLoading(true);
+    try {
+      const { data } = await api.post("/auth/login", { email, password });
+      login(data.token, data.user);
+      showToast(`Welcome back, ${data.user.name}!`, "success");
+      navigate(from, { replace: true });
+    } catch (err) {
+      setError(err.response?.data?.error || "Login failed. Try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="auth-page">
       <div className="auth-card">
@@ -30,7 +56,6 @@ function Login() {
         </div>
 
         <label>EMAIL ADDRESS</label>
-
         <input
           type="email"
           placeholder="your@email.com"
@@ -41,18 +66,35 @@ function Login() {
           }}
         />
 
+        <label>PASSWORD</label>
+        <input
+          type="password"
+          placeholder="••••••••"
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            setError("");
+          }}
+        />
+
         {error && <p className="error">{error}</p>}
 
         <div className="demo-box">
-          <p>Demo accounts — click to autofill:</p>
+          <p>Demo account — click to autofill:</p>
 
-          <span>Member — Alex Rivera</span>
-
-          <span>Admin — Morgan Adeyemi</span>
+          <span
+            onClick={() => {
+              setEmail("alice@gmail.com");
+              setPassword("user123");
+              setError("");
+            }}
+          >
+            Member — Alice Smith
+          </span>
         </div>
 
-        <button className="submit-btn" onClick={handleLogin}>
-          Sign In
+        <button className="submit-btn" onClick={handleLogin} disabled={loading}>
+          {loading ? "Signing in..." : "Sign In"}
         </button>
 
         <Link to="/">

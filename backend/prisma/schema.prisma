@@ -1,5 +1,5 @@
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -63,7 +63,7 @@ model Showtime {
   screenId  Int       @map("screen_id")
   screen    Screen    @relation(fields: [screenId], references: [id], onDelete: Cascade)
   startTime DateTime  @map("start_time")
-  price     Decimal   @db.Decimal(10, 2)
+  price     Float
   createdAt DateTime  @default(now()) @map("created_at")
   bookings  Booking[]
 
@@ -76,7 +76,7 @@ model Booking {
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   showtimeId   Int           @map("showtime_id")
   showtime     Showtime      @relation(fields: [showtimeId], references: [id], onDelete: Cascade)
-  totalCost    Decimal       @map("total_cost") @db.Decimal(10, 2)
+  totalCost    Float         @map("total_cost")
   status       String        @default("confirmed") // 'confirmed', 'cancelled'
   createdAt    DateTime      @default(now()) @map("created_at")
   bookingSeats BookingSeat[]

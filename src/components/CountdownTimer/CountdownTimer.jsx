@@ -1,7 +1,7 @@
-import { useContext } from "react";
-import { BookingContext } from "../../context/BookingContext";
+import { useBooking } from "../../context/BookingContext";
+
 function CountdownTimer() {
-  const { timeLeft } = useContext(BookingContext);
+  const { timeLeft } = useBooking();
 
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
