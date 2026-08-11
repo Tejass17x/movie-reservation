@@ -1,7 +1,22 @@
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
+import { useAuth } from "../context/AuthContext";
+import { useToast } from "../context/ToastContext";
 import "../styles/Profile.css";
 
 function Profile() {
+  const { user, logout } = useAuth();
+  const { showToast } = useToast();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    showToast("Logged out.", "success");
+    navigate("/");
+  };
+
+  if (!user) return null;
+
   return (
     <>
       <Navbar />
@@ -12,20 +27,20 @@ function Profile() {
 
           <div className="profile-field">
             <label>FULL NAME</label>
-            <input type="text" value="Alex Rivera" readOnly />
+            <input type="text" value={user.name} readOnly />
           </div>
 
           <div className="profile-field">
             <label>EMAIL ADDRESS</label>
-            <input type="email" value="alex@example.com" readOnly />
+            <input type="email" value={user.email} readOnly />
           </div>
 
           <div className="profile-field">
             <label>ACCOUNT ROLE</label>
-            <input type="text" value="Member" readOnly />
+            <input type="text" value={user.role} readOnly />
           </div>
 
-          <button>Edit Profile</button>
+          <button onClick={handleLogout}>Logout</button>
         </div>
       </main>
     </>

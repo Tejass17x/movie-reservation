@@ -1,24 +1,50 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar/Navbar";
 import MovieCard from "../components/MovieCard/MovieCard";
-import movies from "../data/movies";
+import api from "../utils/api.js";
 import "../styles/Home.css";
 import hero from "../assets/hero.png";
 
+const GENRES = ["All", "Sci-Fi", "Thriller", "Drama", "Action", "Comedy", "Horror"];
+
 function Home() {
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [search, setSearch] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("All");
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const fetchMovies = async () => {
+      try {
+        const { data } = await api.get("/movies");
+        if (!cancelled) setMovies(data);
+      } catch (err) {
+        if (!cancelled) {
+          setError(err.response?.data?.error || "Failed to load movies.");
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+
+    fetchMovies();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const filteredMovies = movies.filter((movie) => {
     const matchesSearch = movie.title
       .toLowerCase()
       .includes(search.toLowerCase());
-
     const matchesGenre =
       selectedGenre === "All" || movie.genre === selectedGenre;
-
     return matchesSearch && matchesGenre;
   });
+
   return (
     <>
       <Navbar />
@@ -37,63 +63,36 @@ function Home() {
         <section className="search-filter">
           <input
             type="text"
-            placeholder="Search by title or director..."
+            placeholder="Search by title..."
             className="search-box"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
 
           <div className="genres">
-            <button
-              className={selectedGenre === "All" ? "active" : ""}
-              onClick={() => setSelectedGenre("All")}
-            >
-              All
-            </button>
-
-            <button
-              className={selectedGenre === "Sci-Fi" ? "active" : ""}
-              onClick={() => setSelectedGenre("Sci-Fi")}
-            >
-              Sci-Fi
-            </button>
-
-            <button
-              className={selectedGenre === "Thriller" ? "active" : ""}
-              onClick={() => setSelectedGenre("Thriller")}
-            >
-              Thriller
-            </button>
-
-            <button
-              className={selectedGenre === "Drama" ? "active" : ""}
-              onClick={() => setSelectedGenre("Drama")}
-            >
-              Drama
-            </button>
-
-            <button
-              className={selectedGenre === "Action" ? "active" : ""}
-              onClick={() => setSelectedGenre("Action")}
-            >
-              Action
-            </button>
-
-            <button
-              className={selectedGenre === "Comedy" ? "active" : ""}
-              onClick={() => setSelectedGenre("Comedy")}
-            >
-              Comedy
-            </button>
-
-            <button
-              className={selectedGenre === "Horror" ? "active" : ""}
-              onClick={() => setSelectedGenre("Horror")}
-            >
-              Horror
-            </button>
+            {GENRES.map((genre) => (
+              <button
+                key={genre}
+                className={selectedGenre === genre ? "active" : ""}
+                onClick={() => setSelectedGenre(genre)}
+              >
+                {genre}
+              </button>
+            ))}
           </div>
         </section>
+
+        {loading && (
+          <div className="spinner-container">
+            <div className="spinner"></div>
+          </div>
+        )}
+
+        {error && <p className="detail-error">{error}</p>}
+
+        {!loading && !error && filteredMovies.length === 0 && (
+          <p className="empty-showtimes">No films found.</p>
+        )}
 
         <section className="movie-grid">
           {filteredMovies.map((movie) => (

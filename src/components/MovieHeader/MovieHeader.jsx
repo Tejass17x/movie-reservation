@@ -1,31 +1,35 @@
+import { useNavigate } from "react-router-dom";
+import { formatDate, formatTime, formatCurrency } from "../../utils/format";
 import "./MovieHeader.css";
 
-function MovieHeader({ movie }) {
+function MovieHeader({ movie, showtime }) {
+  const navigate = useNavigate();
+
+  const theaterName = showtime?.screen?.theater?.name || "";
+  const screenName = showtime?.screen?.name || "";
+
   return (
     <div className="movie-header">
-
-      <button className="back-btn">
+      <button className="back-btn" onClick={() => navigate(-1)}>
         ← Back
       </button>
 
       <h1>{movie.title}</h1>
 
       <p>
-        {movie.theatre}
+        {theaterName}
+        {screenName && (
+          <>
+            <span> • </span>
+            {screenName}
+          </>
+        )}
         <span> • </span>
-
-        {movie.date}
-
+        {formatDate(showtime.startTime)}
         <span> • </span>
-
-        {movie.time}
-
-        <span className="price">
-          {" "}• ${movie.price} / seat
-        </span>
-
+        {formatTime(showtime.startTime)}
+        <span className="price"> • {formatCurrency(showtime.price)} / seat</span>
       </p>
-
     </div>
   );
 }

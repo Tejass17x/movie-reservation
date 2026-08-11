@@ -26,6 +26,11 @@
     cursor:not-allowed;
 }
 
+.seat.held{
+    background:#8a5a1e;
+    cursor:not-allowed;
+}
+
 .seat.blocked{
     background:#7d2030;
     cursor:not-allowed;
