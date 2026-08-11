@@ -1,24 +1,42 @@
 {
-  "name": "cinevault-booking",
+  "name": "cinevault-movie-reservation",
+  "version": "1.0.0",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "description": "Movie Reservation System with React frontend and Express backend",
+  "main": "server.js",
   "scripts": {
     "dev": "vite",
+    "server": "nodemon server.js",
+    "start": "node server.js",
     "build": "vite build",
-    "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "oxlint"
   },
+  "keywords": [
+    "movie-reservation",
+    "react",
+    "vite",
+    "express",
+    "mysql",
+    "sequelize"
+  ],
   "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mysql2": "^3.23.2",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "react-router-dom": "^7.18.2"
+    "react-router-dom": "^7.18.2",
+    "sequelize": "^6.37.8"
   },
   "devDependencies": {
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.4",
+    "nodemon": "^3.1.14",
     "oxlint": "^1.75.0",
     "vite": "^8.2.0"
   }
 }
+>>>>>>> 40a68d586cd7249b8b1746e5452c97fe27b5188b

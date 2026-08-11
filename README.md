@@ -1,6 +1,6 @@
-# Movie Reservation
+# movie-reservation
 
-A React-based movie ticket booking application.
+A full-stack movie ticket booking application built with a React frontend and an Express + MySQL backend.
 
 ## Features
 
@@ -10,18 +10,51 @@ A React-based movie ticket booking application.
 - Order summary
 - Payment page with live card preview
 - Booking confirmation (Digital Ticket UI)
+- Catalog and showtime management service
 
 ## Tech Stack
 
-- React.js
-- React Router
-- Context API
-- CSS3
-- Vite
+- Frontend: React.js, React Router, Context API, CSS3, Vite
+- Backend: Node.js, Express, MySQL, Sequelize
 
-## Run Locally
+## Getting Started
+
+### Prerequisites
+
+- Node.js
+- MySQL
+
+### Installation
 
 ```bash
 npm install
+```
+
+### Run the backend server
+
+```bash
+npm run server
+```
+
+### Run the frontend dev server
+
+```bash
 npm run dev
 ```
+
+### Build for production
+
+```bash
+npm run build
+```
+
+## Project Structure
+
+- `server.js` — Express backend entry point
+- `config/` — Database configuration
+- `controllers/` — Route controllers
+- `middleware/` — Validation middleware
+- `models/` — Sequelize models
+- `routes/` — API routes
+- `services/` — Business logic services
+- `src/` — React frontend
